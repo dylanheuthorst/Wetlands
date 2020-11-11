@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Animal</title>
+
+    <script
+            src="https://code.jquery.com/jquery-3.5.1.min.js"
+            integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+            crossorigin="anonymous">
+    </script>
+    <script>
+        $(document).ready(function (){
+            $.ajax({
+                type: 'Get',
+                dataType: 'JSON',
+                url: 'http://nzwetland.herokuapp.com/api/Animal/',
+                success: function (data) {
+                    // location.reload();
+
+                    i = 0;
+                    while (i < data.length){
+                        animal = data[i];
+                        $("#animal_id_input").append("<option value='"+animal.id+"'>"+animal.id+" "+animal.commonname+""+animal.type+"\</option>");
+                        i = i + 1;
+                        updatelanduse = landuse.id
+                    }
+                    $("#landuse_id_input").change(function(){
+                        site = getlanduseInfo($("#landuse_id_input").val());
+                    });
+                    $("#update_landuse_but").click(function(){
+                        updatelanduseInfo($("#landuse_id_input").val());
+                    });
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+
+            function getlanduseInfo (landuse_id) {
+                $.ajax({
+                    type: 'Get',
+                    dataType: 'JSON',
+                    url: 'http://nzwetland.herokuapp.com/api/landuse/'+landuse_id+'/',
+                    success: function (data) {
+                        // location.reload();
+                        $("#landuse_id").val(data.id);
+                        $("#landuse_description").val(data.description);
+                        $("#landuse_landusetype").val(data.landusetype);
+
+
+
+
+                        console.log(data);
+
+
+                    },
+
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+            }
+
+
+            $("#update_but").click(function (){
+                description = $("#landuse_description").val();
+                landusetype = $("#landuse_landusetype").val();
+
+
+
+                $.ajax({
+                    type: 'PUT',
+                    dataType: 'JSON',
+                    url: 'http://nzwetland.herokuapp.com/api/landuse/'+ updatelanduse+'/',
+                    data:{
+                        "description":description,
+                        "landusetype":landusetype,
+                    },
+                    success: function (data) {
+                        alert("Landuse updated successfully");
+                        if (confirm(' Update another land use?')) {
+                            location.reload();}
+                        else{
+                            console.log("");
+                            window.location.href = "mainmenu.html";
+                        }
+                    },
+
+
+                    error: function (err) {
+                        console.log(err);
+                        errors = JSON.parse(err.responseText);
+                        console.log(errors);
+                        $("#landuse_id_input_err").text(errors.id);
+                    }
+                });
+            })
+            // location.reload();
+
+
+        })
+
+
+
+        $(document).ready(function () {
+
+
+        });
+    </script>
+
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body id="page6">
+<nav id="nav">
+    <ul id="navigation">
+        <li><a href="mainmenu.html" class="first">Main Menu</a></li>
+        <li><a href="#">Site &raquo;</a>
+            <ul>
+                <li><a href="addsite.html">Add Site</a></li>
+                <li><a href="updatesite.html">Update Site</a></li>
+                <li><a href="deletesite.html">Delete Site</a>
+                <li><a href="producesitereport.html">Produce Site Reports</a></li>
+
+            </ul>
+        </li>
+        <li><a href="#">Site Habitat &raquo;</a>
+            <ul>
+                <li><a href="addsitehabitat.html">Add Site Habitat</a></li>
+                <li><a href="removesitehabitat.html">Remove Site Habitat</a></li>
+                <li><a href="producesitehabitat.html">Produce Site Habitat Report</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Habitat &raquo; </a>
+            <ul>
+                <li><a href="addhabitat.html">Add Habitat</a></li>
+                <li><a href="updatehabitat.html">Update Habitat</a></li>
+                <li><a href="deletehabitat.html">Delete Habitat </a></li>
+                <li><a href="producehabitat.html">Produce Habitat Report </a></li>
+            </ul></li>
+
+        <li><a href="#">Landuse &raquo; </a>
+            <ul>
+                <li><a href="assignlanduse.html">Assign Landuse</a></li>
+                <li><a href="removelanduse.html">Remove Landuse</a></li>
+                <li><a href="addlanduse.html">Add Landuse</a></li>
+                <li><a href="updatelanduse.html">Update Landuse</a></li>
+                <li><a href="deletelanduse.html">Delete Landuse</a></li>
+                <li><a href="producelandusereport.html">Produce Landuses Report </a></li>
+            </ul></li>
+        <button id="logoutBut" >Log out</button>
+    </ul>
+</nav><br><br>
+<div class="container">
+    <h1>Update Animal</h1>
+    <form onsubmit ="return false">
+        <div class="div_deletehabitat" >
+            <p><label> Animals: </label>
+                <select id="animal_id_input">
+                    <option value = "">Select one</option>
+                </select>
+            </p>
+            <p> <label>Animal ID:</label><input id = "animal_id" type = "text" maxlength="40" size="40"></p>
+            <p> <label>Common Name:</label><input id = "animal_commonname" type = "text" maxlength="30" size="30"></p>
+            <p> <label>Genus Name:</label><input id = "animal_genus" type = "text" maxlength="30" size="30"></p>
+            <p> <label>Species Name:</label><input id = "animal_species" type = "text" maxlength="30" size="30"></p>
+            <p> <label>Animal Type:</label>
+                <select id="animal_animaltype">
+                    <option value="">Fish</option>
+                    <option value="">Mammal</option>
+                    <option value="">Reptile</option>
+                    <option value="">Bird</option>
+                </select>
+            </p>
+            <p></p>
+        </div>
+    </form>
+
+
+    <button id="update_but">Update</button>
+    <button type="button" ><a href="mainMenu.html"> Return</a></button>
+
+</div><br>
+
+<div id="footer">
+    Copyright @ 2020 By Nz Wetland Group, Unitec, New Zealand.
+</div>
+</body>
+</html>

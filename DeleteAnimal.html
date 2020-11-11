@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Animal</title>
+
+    <script
+            src="https://code.jquery.com/jquery-3.5.1.min.js"
+            integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+            crossorigin="anonymous">
+    </script>
+
+
+
+    <script src="getsinglescript.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body id="page1">
+<nav id="nav">
+    <ul id="navigation">
+        <li><a href="mainmenu.html" class="first">Main Menu</a></li>
+        <li><a href="#">Site &raquo;</a>
+            <ul>
+                <li><a href="addsite.html">Add Site</a></li>
+                <li><a href="updatesite.html">Update Site</a></li>
+                <li><a href="deletesite.html">Delete Site</a>
+                <li><a href="producesitereport.html">Produce Site Reports</a></li>
+
+            </ul>
+        </li>
+        <li><a href="#">Site Habitat &raquo;</a>
+            <ul>
+                <li><a href="addsitehabitat.html">Add Site Habitat</a></li>
+                <li><a href="removesitehabitat.html">Remove Site Habitat</a></li>
+                <li><a href="producesitehabitat.html">Produce Site Habitat Report</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Habitat &raquo; </a>
+            <ul>
+                <li><a href="addhabitat.html">Add Habitat</a></li>
+                <li><a href="updatehabitat.html">Update Habitat</a></li>
+                <li><a href="deletehabitat.html">Delete Habitat </a></li>
+                <li><a href="producehabitat.html">Produce Habitat Report </a></li>
+            </ul></li>
+
+        <li><a href="#">Landuse &raquo; </a>
+            <ul>
+                <li><a href="assignlanduse.html">Assign Landuse</a></li>
+                <li><a href="removelanduse.html">Remove Landuse</a></li>
+                <li><a href="addlanduse.html">Add Landuse</a></li>
+                <li><a href="updatelanduse.html">Update Landuse</a></li>
+                <li><a href="deletelanduse.html">Delete Landuse</a></li>
+                <li><a href="producelandusereport.html">Produce Landuses Report </a></li>
+            </ul></li>
+        <button id="logoutBut" >Log out</button>
+    </ul>
+</nav><br><br>
+<div class="container">
+    <h1>Delete Animal</h1>
+
+    <form onsubmit="return false">
+        <div class="div_deleteanimal">
+            <p><label> Animals: </label>
+                <select id="animal_id_input">
+                    <option value="">Select one</option>
+                </select>
+            </p>
+            <table>
+                <tr>
+                    <td>Animal ID:</td>
+                    <td id="animal_ID"></td>
+                </tr>
+                <tr>
+                    <td>Common Name:</td>
+                    <td id="animal_commonname"></td>
+                </tr>
+                <tr>
+                    <td>Genus Name:</td>
+                    <td id="animal_genusname"></td>
+                </tr>
+                <tr>
+                    <td>Species Name:</td>
+                    <td id="animal_speciesname"></td>
+                </tr>
+                <tr>
+                    <td>Animal Type:</td>
+                    <td id="animal_animaltype"></td>
+                </tr>
+
+            </table>
+        </div>
+
+    </form>
+    <div class="div_but" style="text-align: center">
+
+        <button id="delete_but">DELETE</button>
+        <button type="button" ><a href="mainMenu.html"> Return</a></button>
+    </div>
+
+</div><br><br>
+
+<div id="footer">
+    Copyright @ 2020 By Nz Wetland Group, Unitec, New Zealand.
+</div>
+</body>
+</html>
